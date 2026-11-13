@@ -1,0 +1,105 @@
+import json
+
+from app import db
+
+
+class Atividade(db.Model):
+    __tablename__ = "atividade"
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    titulo = db.Column(db.String(120), nullable=False)
+    descricao = db.Column(db.Text)
+    prazo = db.Column(db.Date)
+    status = db.Column(
+        db.Enum("Pendente", "Concluida"),
+        nullable=False,
+        default="Pendente",
+    )
+    turma_id = db.Column(db.Integer, db.ForeignKey("turma.id"), nullable=False)
+    questoes = db.Column(db.Text)  # JSON: lista de enunciados
+    etapas = db.Column(db.Text)    # JSON: [{"titulo","instrucao"}]
+    pdfArquivo = db.Column(db.String(255), nullable=True)
+    pdfOriginal = db.Column(db.String(255), nullable=True)
+    links = db.Column(db.Text, nullable=True)
+
+
+    respostas = db.relationship("Resposta", backref="atividade", lazy=True,
+                                cascade="all, delete-orphan")
+    feedbacks = db.relationship("Feedback", backref="atividade", lazy=True)
+
+
+    @classmethod
+    def listar(cls):
+        """Retorna todos os registros desta Model."""
+        return cls.query.all()
+
+    @classmethod
+    def buscar_por_id(cls, id):
+        """Busca um registro pelo identificador."""
+        return db.session.get(cls, id)
+
+    @classmethod
+    def criar(cls, **dados):
+        """Cria, persiste e retorna um novo registro."""
+        entidade = cls(**dados)
+        try:
+            db.session.add(entidade)
+            db.session.commit()
+            return entidade
+        except Exception:
+            db.session.rollback()
+            raise
+
+    def atualizar(self, **dados):
+        """Atualiza os campos permitidos desta Model."""
+        for campo, valor in dados.items():
+            if hasattr(self, campo) and campo != "id":
+                setattr(self, campo, valor)
+        try:
+            db.session.commit()
+            return self
+        except Exception:
+            db.session.rollback()
+            raise
+
+    def deletar(self):
+        """Remove este registro do banco."""
+        try:
+            db.session.delete(self)
+            db.session.commit()
+        except Exception:
+            db.session.rollback()
+            raise
+
+    def to_dict(self) -> dict:
+        return {
+            "id": self.id,
+            "titulo": self.titulo,
+            "descricao": self.descricao,
+            "prazo": self.prazo.isoformat() if self.prazo else None,
+            "status": self.status,
+            "turma_id": self.turma_id,
+            "questoes": self.lista_questoes(),
+            "etapas": self.lista_etapas(),
+            "temPdf": bool(self.pdfArquivo),
+            "pdfOriginal": self.pdfOriginal,
+            "links": json.loads(self.links) if self.links else [],
+
+        }
+
+    def lista_etapas(self) -> list:
+        try:
+            dados = json.loads(self.etapas) if self.etapas else []
+        except ValueError:
+            return []
+        return dados if isinstance(dados, list) else []
+
+    def lista_questoes(self) -> list:
+        try:
+            dados = json.loads(self.questoes) if self.questoes else []
+        except ValueError:
+            return []
+        return dados if isinstance(dados, list) else []
+
+    def __repr__(self) -> str:
+        return f"<Atividade id={self.id} titulo={self.titulo!r}>"

@@ -1,0 +1,600 @@
+
+/* ==========================================================
+   ADAPTEDUCA - ESTILOS DAS TELAS CONECTADAS À API
+   ========================================================== */
+
+
+/* ==========================================================
+   1. ESTATÍSTICAS
+   ========================================================== */
+
+.ui-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 14px;
+    margin-bottom: 22px;
+}
+
+.ui-stat {
+    padding: 16px 18px;
+    border-radius: var(--radius);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+}
+
+.ui-stat strong {
+    display: block;
+    font-size: 1.7rem;
+    line-height: 1.15;
+}
+
+.ui-stat small {
+    color: var(--text-2);
+}
+
+.ui-stat.tone-green strong {
+    color: var(--green);
+}
+
+.ui-stat.tone-red strong {
+    color: var(--red);
+}
+
+.ui-stat.tone-blue strong {
+    color: var(--primary);
+}
+
+.ui-stat.tone-purple strong {
+    color: var(--purple);
+}
+
+
+/* ==========================================================
+   2. SEÇÕES, LINHAS E LISTAS
+   ========================================================== */
+
+.ui-section {
+    margin-top: 26px;
+}
+
+.ui-section > h2 {
+    font-size: 1.15rem;
+    margin-bottom: 12px;
+}
+
+.ui-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.ui-list {
+    display: grid;
+    gap: 12px;
+}
+
+
+/* ==========================================================
+   3. BARRAS DE PROGRESSO
+   ========================================================== */
+
+.ui-bar {
+    height: 9px;
+    border-radius: 99px;
+    background: var(--surface-2);
+    overflow: hidden;
+}
+
+.ui-bar > span {
+    display: block;
+    height: 100%;
+    border-radius: 99px;
+    background: var(--gradient);
+}
+
+.ui-bar.warn > span {
+    background: var(--warning);
+}
+
+.ui-bar.bad > span {
+    background: var(--red);
+}
+
+.ui-bar.good > span {
+    background: var(--green);
+}
+
+
+/* ==========================================================
+   4. ETIQUETAS DE STATUS
+   ========================================================== */
+
+.ui-pill {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 99px;
+    font-size: .78rem;
+    font-weight: 700;
+    background: var(--surface-blue);
+    color: var(--primary);
+}
+
+.ui-pill.good {
+    background: var(--surface-green);
+    color: var(--green);
+}
+
+.ui-pill.bad {
+    background: var(--surface-red);
+    color: var(--red);
+}
+
+.ui-pill.warn {
+    background: #fff4d6;
+    color: #8a6100;
+}
+
+
+/* ==========================================================
+   5. GRÁFICOS E INDICADORES
+   ========================================================== */
+
+.ui-bars {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+    height: 150px;
+    padding-top: 8px;
+}
+
+.ui-bars > div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    gap: 4px;
+    min-width: 0;
+}
+
+.ui-bars .col {
+    width: 100%;
+    max-width: 46px;
+    border-radius: 8px 8px 0 0;
+    background: var(--gradient);
+    min-height: 3px;
+}
+
+.ui-bars small {
+    font-size: .7rem;
+    color: var(--text-2);
+    white-space: nowrap;
+}
+
+.ui-bars b {
+    font-size: .75rem;
+}
+
+
+/* ==========================================================
+   6. TABELAS
+   ========================================================== */
+
+.ui-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.ui-table th,
+.ui-table td {
+    text-align: left;
+    padding: 10px 8px;
+    border-bottom: 1px solid var(--border);
+    font-size: .9rem;
+}
+
+.ui-table th {
+    color: var(--text-2);
+    font-size: .78rem;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+}
+
+.ui-table-wrap {
+    overflow-x: auto;
+}
+
+
+/* ==========================================================
+   7. CAMPOS E FORMULÁRIOS
+   ========================================================== */
+
+.ui-empty {
+    padding: 26px;
+    text-align: center;
+    color: var(--text-2);
+    border: 1px dashed var(--border-strong);
+    border-radius: var(--radius);
+}
+
+.ui-field {
+    display: grid;
+    gap: 5px;
+    margin-bottom: 12px;
+}
+
+.ui-field label {
+    font-weight: 600;
+    font-size: .88rem;
+}
+
+
+/* ==========================================================
+   8. ABAS E BOTÕES
+   ========================================================== */
+
+.ui-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.ui-tabs button {
+    padding: 8px 14px;
+    border-radius: 99px;
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.ui-tabs button.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+}
+
+.ui-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+}
+
+
+/* ==========================================================
+   9. ADAPTAÇÕES - ESTILOS GERAIS
+   ========================================================== */
+
+.ad-box {
+    line-height: 1.8;
+}
+
+.ad-box p + p {
+    margin-top: 12px;
+}
+
+.ad-list {
+    display: grid;
+    gap: 10px;
+    margin: 10px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ad-list li {
+    padding: 12px 14px;
+    border-radius: var(--radius-sm);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+}
+
+.ad-key {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+}
+
+
+/* ==========================================================
+   10. ADAPTAÇÃO TDAH - BLOCOS DE FOCO
+   ========================================================== */
+
+.ad-block {
+    border: 1px solid var(--border);
+    border-left: 5px solid var(--primary);
+    border-radius: var(--radius);
+    padding: 16px;
+    margin-bottom: 14px;
+    background: var(--surface);
+}
+
+.ad-block h4 {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+}
+
+
+/* PALAVRAS DESTACADAS EM AMARELO
+   CORREÇÃO: TEXTO PRETO PARA MELHOR LEITURA */
+
+.ad-block mark {
+    background: #fff0a8;
+    color: #111111;
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-weight: 700;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+}
+
+
+/* PAUSA E CHECKPOINT DE APRENDIZAGEM */
+
+.ad-check {
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: var(--radius-sm);
+    background: var(--surface-blue);
+    font-size: .9rem;
+}
+
+
+/* ==========================================================
+   11. ADAPTAÇÃO TEA
+   ========================================================== */
+
+.ad-tea ol {
+    padding-left: 22px;
+    display: grid;
+    gap: 12px;
+}
+
+.ad-tea li {
+    padding-left: 4px;
+    font-size: 1.05rem;
+}
+
+
+/* ==========================================================
+   12. MAPA MENTAL - ADAPTEDUCA
+   ========================================================== */
+
+.ad-mm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    width: 100%;
+    padding: 25px 15px;
+}
+
+/* TEMA CENTRAL */
+
+.ad-mm-center {
+    background: linear-gradient(
+        135deg,
+        #315ff4,
+        #a855f7
+    );
+    color: #ffffff;
+    padding: 22px 38px;
+    border-radius: 18px;
+    font-size: 1.5rem;
+    font-weight: 800;
+    text-align: center;
+    max-width: 500px;
+    overflow-wrap: anywhere;
+    box-shadow: 0 8px 25px rgba(70, 90, 255, .25);
+}
+
+/* RAMIFICAÇÕES */
+
+.ad-mm-branches {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    width: 100%;
+    margin-top: 42px;
+    position: relative;
+}
+
+/* CARTÕES DOS RAMOS */
+
+.ad-mm-branch {
+    min-width: 0;
+    border: 1px solid rgba(99, 130, 255, .35);
+    border-left: 5px solid #648bff;
+    border-radius: 16px;
+    padding: 24px;
+    background: var(--surface);
+    box-shadow: 0 5px 18px rgba(0, 0, 0, .08);
+    transition: transform .2s, box-shadow .2s;
+}
+
+.ad-mm-branch:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(60, 90, 255, .14);
+}
+
+/* TÍTULOS DOS RAMOS */
+
+.ad-mm-branch > strong {
+    display: block;
+    font-size: 1.15rem;
+    color: var(--primary);
+    margin-bottom: 18px;
+    line-height: 1.4;
+}
+
+/* LISTA DE CONCEITOS */
+
+.ad-mm-branch ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.ad-mm-branch li {
+    padding: 12px 14px;
+    border-radius: 9px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    font-size: .98rem;
+    line-height: 1.65;
+    overflow-wrap: anywhere;
+    white-space: normal;
+}
+
+.ad-mm-branch li::before {
+    content: "•";
+    color: #648bff;
+    font-weight: 900;
+    margin-right: 8px;
+}
+
+
+/* ==========================================================
+   13. ADAPTAÇÃO DE ÁUDIO
+   ========================================================== */
+
+.ad-audio {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 16px;
+    border-radius: var(--radius);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+}
+
+.ad-audio .seg {
+    margin-top: 14px;
+    display: grid;
+    gap: 8px;
+}
+
+.ad-audio .seg p {
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    opacity: .65;
+}
+
+.ad-audio .seg p.on {
+    opacity: 1;
+    background: var(--surface-blue);
+    font-weight: 600;
+}
+
+
+/* ==========================================================
+   14. FLASHCARDS
+   ========================================================== */
+
+.ad-flip {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 14px;
+}
+
+.ad-card {
+    min-height: 150px;
+    padding: 18px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
+    cursor: pointer;
+    text-align: left;
+    font: inherit;
+    color: inherit;
+}
+
+.ad-card.flipped {
+    background: var(--surface-green);
+}
+
+.ad-card small {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-2);
+}
+
+
+/* ==========================================================
+   15. TEMPORIZADOR E MODO FOCO
+   ========================================================== */
+
+.ad-timer {
+    font-size: 2.4rem;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+}
+
+.ad-focus {
+    padding: 18px;
+    border-radius: var(--radius);
+    background: var(--surface-2);
+    margin-bottom: 16px;
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+
+/* ==========================================================
+   16. RESPONSIVIDADE - CELULARES
+   ========================================================== */
+
+@media (max-width: 750px) {
+    .ad-mm-branches {
+        grid-template-columns: 1fr;
+    }
+
+    .ad-mm-center {
+        font-size: 1.15rem;
+        padding: 16px 22px;
+    }
+
+    .ad-mm-branch {
+        padding: 18px;
+    }
+}
+
+@media (max-width: 620px) {
+    .ui-bars {
+        gap: 5px;
+    }
+
+    .ui-table th,
+    .ui-table td {
+        padding: 8px 4px;
+        font-size: .82rem;
+    }
+}
+
+
+/* ==========================================================
+   17. AJUSTES DE INTERFACE
+   ========================================================== */
+
+/* Impede que o botão flutuante de ajuda cubra
+   o botão de envio da adaptação */
+
+.adaptation-reference .help-fab {
+    display: none;
+}
