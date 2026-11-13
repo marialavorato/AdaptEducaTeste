@@ -1,0 +1,137 @@
+from sqlalchemy.dialects import mysql
+
+from app import db
+
+
+class Conteudo(db.Model):
+    __tablename__ = "conteudo"
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    titulo = db.Column(db.String(120), nullable=False)
+    tipo = db.Column(db.Enum("Texto", "PDF", "Video", "Link"), nullable=False)
+    arquivo = db.Column(db.String(255))      # link, ou nome do PDF guardado
+    arquivoOriginal = db.Column(db.String(255))
+    linkExterno = db.Column(db.String(2048), nullable=True)
+    texto = db.Column(db.Text().with_variant(mysql.LONGTEXT(), "mysql"))  # texto-base usado nas adaptações
+    dataPostagem = db.Column(db.Date)
+    turma_id = db.Column(db.Integer, db.ForeignKey("turma.id"), nullable=False)
+
+    adaptacoes = db.relationship("Adaptacao", backref="conteudo", lazy=True)
+
+
+    @classmethod
+    def listar(cls):
+        """Retorna todos os registros desta Model."""
+        return cls.query.all()
+
+    @classmethod
+    def buscar_por_id(cls, id):
+        """Busca um registro pelo identificador."""
+        return db.session.get(cls, id)
+
+    @classmethod
+    def criar(cls, **dados):
+        """Cria, persiste e retorna um novo registro."""
+        entidade = cls(**dados)
+        try:
+            db.session.add(entidade)
+            db.session.commit()
+            return entidade
+        except Exception:
+            db.session.rollback()
+            raise
+
+    def atualizar(self, **dados):
+        """Atualiza os campos permitidos desta Model."""
+        for campo, valor in dados.items():
+            if hasattr(self, campo) and campo != "id":
+                setattr(self, campo, valor)
+        try:
+            db.session.commit()
+            return self
+        except Exception:
+            db.session.rollback()
+            raise
+
+    def deletar(self):
+        """Remove este registro do banco."""
+        try:
+            db.session.delete(self)
+            db.session.commit()
+        except Exception:
+            db.session.rollback()
+            raise
+
+    def to_dict(self) -> dict:
+        return {
+            "id": self.id,
+            "titulo": self.titulo,
+            "tipo": self.tipo,
+            "arquivo": self.arquivo if self.tipo == "Link" else None,
+            "arquivoOriginal": self.arquivoOriginal,     
+            "linkExterno": self.linkExterno,
+            "temPdf": self.tipo == "PDF" and bool(self.arquivo),
+            "dataPostagem": (
+                self.dataPostagem.isoformat() if self.dataPostagem else None
+            ),
+            "turma_id": self.turma_id,
+        }
+
+
+    def to_dict(self) -> dict:
+
+        # Identifica o PDF salvo.
+        tem_pdf = bool(
+            self.arquivo
+            and self.arquivo.lower().endswith(".pdf")
+        )
+
+        # Mantém compatibilidade com links antigos.
+        link = self.linkExterno or (
+            self.arquivo
+            if self.tipo == "Link"
+            else None
+        )
+
+        return {
+            "id": self.id,
+            "titulo": self.titulo,
+            "tipo": self.tipo,
+
+            "arquivo": link,
+            "linkExterno": link,
+            "arquivoOriginal": self.arquivoOriginal,
+
+            "temPdf": tem_pdf,
+
+            "dataPostagem": (
+                self.dataPostagem.isoformat()
+                if self.dataPostagem
+                else None
+            ),
+
+            "turma_id": self.turma_id
+        }
+
+
+    def to_dict_completo(self) -> dict:
+        """Retorna os dados completos do conteúdo para estudo."""
+
+        dados = self.to_dict()
+
+        dados.update({
+            "texto": self.texto,
+            "arquivoOriginal": self.arquivoOriginal,
+            "linkExterno": self.linkExterno,
+            "temPdf": bool(
+                self.arquivo
+                and self.arquivo.lower().endswith(".pdf")
+            )
+        })
+
+        return dados
+
+
+
+    def __repr__(self) -> str:
+        return f"<Conteudo id={self.id} titulo={self.titulo!r}>"

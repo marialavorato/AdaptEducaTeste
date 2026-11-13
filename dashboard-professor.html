@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Painel do professor AdaptEduca com visão das turmas e desempenho dos alunos.">
+  <title>Painel do Professor | AdaptEduca</title>
+  <script>document.documentElement.dataset.theme=localStorage.getItem('adapteduca_theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');</script>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css"><link rel="stylesheet" href="css/app.css">
+</head>
+<body class="reference-dashboard professor-reference" data-root="./" data-page="dashboard-professor" data-private="true" data-role="professor" data-reference-header="true">
+  <div id="site-header"></div>
+
+  <main>
+<section class="page-hero role-dashboard-hero">
+      <div class="container">
+        <h1>Bem-vindo, Professor(a) <span data-user-first>Carlos</span>! <span aria-hidden="true">👨‍🏫</span></h1>
+        <p>Aqui está um resumo do desempenho das suas turmas</p>
+      </div>
+    </section>
+<div class="container app-page" id="app" data-loading="1"><p class="muted">Carregando…</p></div>
+</main>
+
+  <script defer src="js/data.js"></script>
+  <script defer src="js/theme.js"></script>
+  <script defer src="js/api.js"></script><script defer src="js/auth.js"></script>
+  <script defer src="js/navigation.js"></script>
+  <script defer src="js/components.js"></script>
+  <script defer src="js/ui.js"></script><script defer src="js/script.js"></script><script defer src="js/pages-professor.js"></script>
+</body>
+</html>
